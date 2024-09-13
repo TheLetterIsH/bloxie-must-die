@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cocnab8v1yeuh"]
+
+[node name="GameArena" type="Node2D"]
