@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://uaki5lgoi8bh"]
+
+[ext_resource type="Texture2D" uid="uid://bieip64rk7735" path="res://graphics/environment/checkerboard_tileset.png" id="1_hi1f7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qpmwa"]
+texture = ExtResource("1_hi1f7")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_qpmwa")

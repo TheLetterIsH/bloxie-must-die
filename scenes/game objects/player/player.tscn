@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0voq0u04dtsa"]
+
+[ext_resource type="Script" path="res://scenes/game objects/player/player.gd" id="1_2n8ui"]
+[ext_resource type="Texture2D" uid="uid://daao2e7w6p4dh" path="res://scenes/game objects/player/player.png" id="1_kyla2"]
+[ext_resource type="PackedScene" uid="uid://c0lmduusb11js" path="res://scenes/particles/dash trail/dash_trail_particles.tscn" id="2_qhwo4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8nrx3"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_2n8ui")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kyla2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8nrx3")
+
+[node name="DashTrailParticles" parent="." instance=ExtResource("2_qhwo4")]
+
+[node name="DashDurationTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]

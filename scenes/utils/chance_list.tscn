@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djojhqqu8hmtt"]
+
+[ext_resource type="Script" path="res://scenes/utils/chance_list.gd" id="1_cweow"]
+
+[node name="ChanceList" type="Node"]
+script = ExtResource("1_cweow")
