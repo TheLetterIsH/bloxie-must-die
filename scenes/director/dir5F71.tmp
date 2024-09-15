@@ -7,6 +7,5 @@ script = ExtResource("1_kctjt")
 
 [node name="WaveTimer" type="Timer" parent="."]
 wait_time = 24.0
-autostart = true
 
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
