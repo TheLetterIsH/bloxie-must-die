@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://xaq5i3t5c8a1"]
+
+[ext_resource type="Script" path="res://scenes/game objects/point/point.gd" id="1_ej45t"]
+[ext_resource type="Texture2D" uid="uid://bcwsx7k6tdj2p" path="res://scenes/game objects/point/point.png" id="1_sapk4"]
+[ext_resource type="PackedScene" uid="uid://qmgxlmud06rb" path="res://scenes/particles/death/particles_death.tscn" id="2_vd44p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cdyl7"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_pn0ae"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_78gcs"]
+_data = {
+"idle": SubResource("Animation_pn0ae")
+}
+
+[node name="Point" type="Area2D"]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("1_ej45t")
+color = Color(0.305882, 0.631373, 0.866667, 1)
+death_particles_scene = ExtResource("2_vd44p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_sapk4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cdyl7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_78gcs")
+}
+autoplay = "idle"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

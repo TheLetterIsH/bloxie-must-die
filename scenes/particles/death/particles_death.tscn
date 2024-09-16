@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://qmgxlmud06rb"]
+
+[ext_resource type="Script" path="res://scenes/particles/death/particles_death.gd" id="1_j57ay"]
+[ext_resource type="Texture2D" uid="uid://yvtomh362n4d" path="res://scenes/particles/death/death.png" id="1_t5ath"]
+
+[sub_resource type="Curve" id="Curve_ppiqx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.501279), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6o661"]
+curve = SubResource("Curve_ppiqx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mpw80"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_6o661")
+
+[node name="ParticlesDeath" type="GPUParticles2D"]
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_mpw80")
+texture = ExtResource("1_t5ath")
+lifetime = 0.35
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_j57ay")

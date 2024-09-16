@@ -22,7 +22,7 @@ initial_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_p3r5s")
 
-[node name="DashTrailParticles" type="GPUParticles2D"]
+[node name="ParticlesDashTrail" type="GPUParticles2D"]
 z_index = -1
 emitting = false
 amount = 4

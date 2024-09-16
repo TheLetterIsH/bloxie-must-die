@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0voq0u04dtsa"]
+[gd_scene load_steps=7 format=3 uid="uid://d0voq0u04dtsa"]
 
 [ext_resource type="Script" path="res://scenes/game objects/player/player.gd" id="1_2n8ui"]
 [ext_resource type="Texture2D" uid="uid://daao2e7w6p4dh" path="res://scenes/game objects/player/player.png" id="1_kyla2"]
-[ext_resource type="PackedScene" uid="uid://c0lmduusb11js" path="res://scenes/particles/dash trail/dash_trail_particles.tscn" id="2_qhwo4"]
+[ext_resource type="PackedScene" uid="uid://c0lmduusb11js" path="res://scenes/particles/dash trail/particles_dash_trail.tscn" id="2_qhwo4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nrx3"]
 radius = 5.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2b3w2"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wd4j5"]
+size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -18,6 +24,24 @@ texture = ExtResource("1_kyla2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8nrx3")
 
+[node name="HurtBoxArea2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 16
+
+[node name="HurtBoxCollisionShape2D" type="CollisionShape2D" parent="HurtBoxArea2D"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_2b3w2")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
+[node name="CollectibleArea2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleArea2D"]
+shape = SubResource("RectangleShape2D_wd4j5")
+
 [node name="DashTrailParticles" parent="." instance=ExtResource("2_qhwo4")]
 
 [node name="DashDurationTimer" type="Timer" parent="."]
@@ -28,5 +52,14 @@ one_shot = true
 unique_name_in_owner = true
 one_shot = true
 
+[node name="DoomTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 12.0
+autostart = true
+
+[connection signal="area_entered" from="HurtBoxArea2D" to="." method="_on_hurt_box_area_2d_area_entered"]
+[connection signal="body_entered" from="HurtBoxArea2D" to="." method="_on_hurt_box_area_2d_body_entered"]
+[connection signal="area_entered" from="CollectibleArea2D" to="." method="_on_collectible_area_2d_area_entered"]
 [connection signal="timeout" from="DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
 [connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
+[connection signal="timeout" from="DoomTimer" to="." method="_on_doom_timer_timeout"]

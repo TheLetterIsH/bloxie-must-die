@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameEvents="*res://scenes/autoloads/game_events.tscn"
 ObjectManager="*res://scenes/autoloads/object_manager.tscn"
+Utils="*res://scenes/utils/utils.tscn"
 
 [display]
 
@@ -36,9 +37,14 @@ project/assembly_name="Bloxie Must Die"
 
 player=""
 effects_container=""
+enemy_container=""
+projectile_container=""
+collectible_container=""
+director=""
 
 [gui]
 
+theme/custom="res://resources/theme/game_theme.tres"
 theme/custom_font="res://resources/fonts/retro-pixel-thick.ttf"
 theme/default_font_antialiasing=0
 theme/default_font_hinting=0
@@ -92,10 +98,11 @@ dash={
 
 2d_physics/layer_1="environment"
 2d_physics/layer_2="player collider"
-2d_physics/layer_3="player area"
+2d_physics/layer_3="player hurtbox area"
 2d_physics/layer_4="enemy collider"
 2d_physics/layer_5="enemy area"
-2d_physics/layer_6="collectible area"
+2d_physics/layer_6="player collectible area"
+2d_physics/layer_7="collectible area"
 
 [rendering]
 

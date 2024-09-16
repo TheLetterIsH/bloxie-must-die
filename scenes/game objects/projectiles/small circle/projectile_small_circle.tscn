@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbpgyl1u7q8vj"]
+
+[ext_resource type="Script" path="res://scenes/game objects/projectiles/small circle/projectile_small_circle.gd" id="1_80d2y"]
+[ext_resource type="Texture2D" uid="uid://hjc26awdp5d8" path="res://scenes/game objects/projectiles/small circle/projectile_small_circle.png" id="2_cam56"]
+[ext_resource type="PackedScene" uid="uid://qmgxlmud06rb" path="res://scenes/particles/death/particles_death.tscn" id="2_qmbg0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x00y6"]
+radius = 3.5
+
+[node name="ProjectileSmallCircle" type="Area2D"]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_80d2y")
+death_particles_scene = ExtResource("2_qmbg0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cam56")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x00y6")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,9 +1,10 @@
 extends Node2D
 class_name Director
 
+@export var point_scene: PackedScene
 @export var enemy_scenes: Dictionary
-
-var time: float = 0.0
+@export var enemy_colors: Dictionary
+@export var enemy_spawn_indicator_scene: PackedScene
 
 var wave: int = 1
 var wave_duration: float = 24.0
@@ -18,6 +19,8 @@ var enemy_spawn_times: Array = []
 var wave_time: float = 0.0
 var index: int = 0
 
+var time_before_spawning_enemy: float = 1.0
+
 @onready var wave_timer: Timer = $WaveTimer
 
 
@@ -27,10 +30,10 @@ func _ready() -> void:
 	set_enemies_to_points()
 	set_enemy_spawn_chances()
 	set_enemies_for_current_wave()
+	spawn_point()
 
 
 func _process(delta: float) -> void:
-	time += delta
 	wave_time += delta
 	
 	if index >= len(enemy_spawn_times):
@@ -41,8 +44,28 @@ func _process(delta: float) -> void:
 		index += 1
 
 
-func spawn_enemy(enemy: String) -> void:
-	print(str(wave_time) + ": " + enemy)
+func spawn_point() -> void:
+	var point_instance := point_scene.instantiate()
+	point_instance.global_position = get_random_spawn_position()
+	ObjectManager.get_collectible_container().add_child(point_instance)
+
+
+func spawn_enemy(enemy_type: String) -> void:
+	print(str(index) + ": " + str(wave_time) + ", " + enemy_type)
+	
+	var spawn_position := get_random_spawn_position()
+	
+	var enemy_spawn_indicator_instance := enemy_spawn_indicator_scene.instantiate() as Node2D
+	enemy_spawn_indicator_instance.global_position = spawn_position
+	enemy_spawn_indicator_instance.modulate = enemy_colors[enemy_type]
+	ObjectManager.get_effects_container().add_child(enemy_spawn_indicator_instance)
+	
+	await get_tree().create_timer(time_before_spawning_enemy).timeout
+	
+	var enemy_instance := (enemy_scenes[enemy_type] as PackedScene).instantiate() as Area2D
+	enemy_instance.global_position = spawn_position
+	ObjectManager.get_enemy_container().add_child(enemy_instance)
+	enemy_instance.color = enemy_colors[enemy_type]
 
 
 func set_wave_to_points() -> void:
@@ -123,6 +146,13 @@ func increment_wave() -> void:
 	
 	wave_time = 0.0
 	index = 0
+
+
+func get_random_spawn_position() -> Vector2:
+	var position_x := randf_range(-176, 176)
+	var position_y := randf_range(-144, 144)
+	
+	return Vector2(position_x, position_y)
 
 
 func _on_wave_timer_timeout() -> void:
