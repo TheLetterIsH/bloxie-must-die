@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://6rw2dffqa0wj"]
 
-[ext_resource type="Texture2D" uid="uid://dt1lnktkpu1i6" path="res://scenes/game objects/enemies/spawner indicator/spawn_indicator.png" id="1_cmlm8"]
+[ext_resource type="Texture2D" uid="uid://dt1lnktkpu1i6" path="res://scenes/game objects/enemies/_spawner indicator/spawn_indicator.png" id="1_cmlm8"]
 
 [sub_resource type="Animation" id="Animation_opuea"]
 length = 0.001

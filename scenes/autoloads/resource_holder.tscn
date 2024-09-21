@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxp3kub23hh1k"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/resource_holder.gd" id="1_frard"]
+
+[node name="ResourceHolder" type="Node"]
+script = ExtResource("1_frard")

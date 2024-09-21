@@ -19,12 +19,16 @@ config/icon="res://icon.svg"
 
 GameEvents="*res://scenes/autoloads/game_events.tscn"
 ObjectManager="*res://scenes/autoloads/object_manager.tscn"
+ResourceHolder="*res://scenes/autoloads/resource_holder.tscn"
 Utils="*res://scenes/utils/utils.tscn"
+Shaker="*res://addons/shaker/src/Shaker.gd"
+SoundManager="*res://addons/sound_manager/sound_manager.gd"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
@@ -32,6 +36,10 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="Bloxie Must Die"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/shaker/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [global_group]
 

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bftkr3lfea0ml"]
+
+[ext_resource type="Script" path="res://scenes/game objects/enemies/waver/enemy_waver.gd" id="1_nwsbt"]
+[ext_resource type="PackedScene" uid="uid://d2tupaqijub0a" path="res://scenes/game objects/projectiles/small square/projectile_small_square.tscn" id="2_g2wf0"]
+[ext_resource type="PackedScene" uid="uid://qmgxlmud06rb" path="res://scenes/particles/death/particles_death.tscn" id="3_oqraf"]
+[ext_resource type="Texture2D" uid="uid://42l3y7dce0sf" path="res://scenes/game objects/enemies/waver/waver.png" id="4_h1ngf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x321c"]
+size = Vector2(10, 10)
+
+[node name="EnemyWaver" type="Area2D"]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_nwsbt")
+color = Color(0.823529, 0.388235, 0.678431, 1)
+projectile_scene = ExtResource("2_g2wf0")
+death_particles_scene = ExtResource("3_oqraf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_h1ngf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x321c")

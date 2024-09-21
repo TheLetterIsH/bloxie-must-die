@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 @export var color: Color
 @export var projectile_scene: PackedScene
@@ -31,7 +31,7 @@ func shoot_at_player() -> void:
 	
 	perform_effects("shoot")
 	
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.15).timeout
 	
 	destroy()
 
@@ -51,6 +51,8 @@ func perform_effects(effect_type: String) -> void:
 		var tween := self.create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		tween.tween_property(sprite, "scale", Vector2(1.5, 1.5), 0.05)
 		tween.tween_property(sprite, "scale", Vector2(0.5, 0.5), 0.05)
+		
+		SoundManager.play_sound_with_pitch(ResourceHolder.sound_shoot_1, randf_range(0.8, 1.2), "Sound")
 	elif effect_type == "death":
 		var death_particles_instance := death_particles_scene.instantiate()
 		death_particles_instance.global_position = self.global_position

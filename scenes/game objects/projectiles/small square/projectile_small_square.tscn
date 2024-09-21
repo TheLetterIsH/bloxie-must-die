@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2tupaqijub0a"]
+
+[ext_resource type="Script" path="res://scenes/game objects/projectiles/small square/projectile_small_square.gd" id="1_deg3o"]
+[ext_resource type="PackedScene" uid="uid://qmgxlmud06rb" path="res://scenes/particles/death/particles_death.tscn" id="2_r58fc"]
+[ext_resource type="Texture2D" uid="uid://da7bg10vf8221" path="res://scenes/game objects/projectiles/small square/projectile_small_square.png" id="3_8rfm5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qx2if"]
+size = Vector2(8, 8)
+
+[node name="ProjectileSmallSquare" type="Area2D"]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_deg3o")
+death_particles_scene = ExtResource("2_r58fc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_8rfm5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qx2if")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

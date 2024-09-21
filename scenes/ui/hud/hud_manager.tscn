@@ -50,7 +50,7 @@ autowrap_mode = 0
 
 [node name="TimeAliveLabel" type="RichTextLabel" parent="LeftMarginContainer/VBoxContainer/TimeAliveVBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.921569, 0.921569, 0.921569, 1)
+modulate = Color(0.305882, 0.631373, 0.866667, 1)
 layout_mode = 2
 size_flags_horizontal = 8
 bbcode_enabled = true
@@ -114,6 +114,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="RightMarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 170)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -148,7 +149,7 @@ autowrap_mode = 0
 
 [node name="ScoreLabel" type="RichTextLabel" parent="RightMarginContainer/VBoxContainer/ScoreVBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.305882, 0.631373, 0.866667, 1)
+modulate = Color(0.921569, 0.921569, 0.921569, 1)
 layout_mode = 2
 size_flags_horizontal = 0
 bbcode_enabled = true
@@ -163,7 +164,7 @@ theme_override_constants/margin_right = 0
 
 [node name="DoomBar" type="TextureProgressBar" parent="RightMarginContainer/VBoxContainer/DoomBarMarginContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 96)
+custom_minimum_size = Vector2(16, 84)
 layout_mode = 2
 size_flags_horizontal = 0
 max_value = 12.0
@@ -177,3 +178,15 @@ stretch_margin_right = 4
 stretch_margin_bottom = 4
 texture_over = ExtResource("7_icghg")
 texture_progress = ExtResource("8_f8wnj")
+
+[node name="DoomHeadingLabel" type="RichTextLabel" parent="RightMarginContainer/VBoxContainer"]
+visible = false
+modulate = Color(0.639216, 0.639216, 0.639216, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/normal_font = ExtResource("1_fws58")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "doom"
+fit_content = true
+autowrap_mode = 0

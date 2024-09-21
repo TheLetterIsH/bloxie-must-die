@@ -22,6 +22,7 @@ var can_dash: bool = true
 
 var health: int = 3
 
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var dash_duration_timer: Timer = %DashDurationTimer
 @onready var dash_cooldown_timer: Timer = %DashCooldownTimer
 @onready var doom_timer: Timer = %DoomTimer
@@ -106,6 +107,21 @@ func destroy() -> void:
 func perform_effects(effect_type: String) -> void:
 	if effect_type == "dash":
 		dash_trail_particles.emitting = true
+		SoundManager.play_sound_with_pitch(ResourceHolder.sound_dash, randf_range(1.2, 1.6), "Sound")
+	elif effect_type == "hurt":
+		sprite.material.set("shader_parameter/flash_value", 1.0)
+		var tween := self.create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		tween.tween_property(sprite.material, "shader_parameter/squash_direction", Vector2(0.0, 1.0), 0.1)
+		tween.tween_property(sprite.material, "shader_parameter/squash_direction", Vector2.ZERO, 0.1)
+		tween.finished.connect(func():
+			self.sprite.material.set("shader_parameter/flash_value", 0.0)
+		)
+		SoundManager.play_sound_with_pitch(ResourceHolder.sound_hurt, randf_range(0.8, 1.2), "Sound")
+	elif effect_type == "score":
+		var tween := self.create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		tween.tween_property(sprite, "scale", Vector2(1.3, 1.3), 0.05)
+		tween.tween_property(sprite, "scale", Vector2.ONE, 0.05).from_current()
+		SoundManager.play_sound_with_pitch(ResourceHolder.sound_point, randf_range(1.8, 2.2), "Sound")
 
 
 func _on_dash_duration_timer_timeout() -> void:
@@ -128,14 +144,21 @@ func _on_doom_timer_timeout() -> void:
 
 func _on_hurt_box_area_2d_area_entered(other_area: Area2D) -> void:
 	update_health(health - 1)
+	
+	perform_effects("hurt")
 
 
 func _on_hurt_box_area_2d_body_entered(other_body: Node2D) -> void:
 	update_health(health - 1)
+	
+	perform_effects("hurt")
 
 
 func _on_collectible_area_2d_area_entered(other_area: Area2D) -> void:
 	update_score(score + 1)
+	
+	perform_effects("score")
+	
 	restart_doom_timer()
 
 

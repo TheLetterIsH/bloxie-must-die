@@ -1,8 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0voq0u04dtsa"]
+[gd_scene load_steps=9 format=3 uid="uid://d0voq0u04dtsa"]
 
 [ext_resource type="Script" path="res://scenes/game objects/player/player.gd" id="1_2n8ui"]
 [ext_resource type="Texture2D" uid="uid://daao2e7w6p4dh" path="res://scenes/game objects/player/player.png" id="1_kyla2"]
+[ext_resource type="Shader" path="res://resources/shaders/hit_flash_and_squash.gdshader" id="2_kbj02"]
 [ext_resource type="PackedScene" uid="uid://c0lmduusb11js" path="res://scenes/particles/dash trail/particles_dash_trail.tscn" id="2_qhwo4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4x63w"]
+shader = ExtResource("2_kbj02")
+shader_parameter/squash_direction = Vector2(0, 0)
+shader_parameter/squash_amount = 0.5
+shader_parameter/flash_color = Color(0.921569, 0.921569, 0.921569, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nrx3"]
 radius = 5.0
@@ -19,6 +27,7 @@ motion_mode = 1
 script = ExtResource("1_2n8ui")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4x63w")
 texture = ExtResource("1_kyla2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
