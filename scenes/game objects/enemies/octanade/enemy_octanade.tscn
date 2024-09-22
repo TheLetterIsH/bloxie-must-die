@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bonpdx0kdt4s4"]
+
+[ext_resource type="Script" path="res://scenes/game objects/enemies/octanade/enemy_octanade.gd" id="1_7j1cu"]
+[ext_resource type="PackedScene" uid="uid://d2tupaqijub0a" path="res://scenes/game objects/projectiles/small square/projectile_small_square.tscn" id="2_mf0q7"]
+[ext_resource type="PackedScene" uid="uid://qmgxlmud06rb" path="res://scenes/particles/death/particles_death.tscn" id="3_f6ggj"]
+[ext_resource type="Texture2D" uid="uid://ch4awfqbrk2fl" path="res://scenes/game objects/enemies/octanade/ocatanade.png" id="4_v3e4a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ug0af"]
+radius = 5.5
+
+[node name="EnemyOctanade" type="Area2D"]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_7j1cu")
+color = Color(0.878431, 0.25098, 0.364706, 1)
+projectile_scene = ExtResource("2_mf0q7")
+death_particles_scene = ExtResource("3_f6ggj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_v3e4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ug0af")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://cssagu51k0yj1"]
+
+[ext_resource type="Script" path="res://scenes/game objects/enemies/blaster/enemy_blaster.gd" id="1_jltaw"]
+[ext_resource type="Texture2D" uid="uid://bykugvdovnr1o" path="res://scenes/game objects/enemies/blaster/blaster.png" id="2_5bquj"]
+[ext_resource type="PackedScene" uid="uid://bbpgyl1u7q8vj" path="res://scenes/game objects/projectiles/small circle/projectile_small_circle.tscn" id="2_cngtr"]
+[ext_resource type="PackedScene" uid="uid://qmgxlmud06rb" path="res://scenes/particles/death/particles_death.tscn" id="3_5fs8x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7m14w"]
+radius = 5.5
+
+[node name="EnemyBlaster" type="Area2D"]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_jltaw")
+color = Color(0.54902, 0.411765, 0.811765, 1)
+projectile_scene = ExtResource("2_cngtr")
+death_particles_scene = ExtResource("3_5fs8x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5bquj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7m14w")

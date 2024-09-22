@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://cocnab8v1yeuh"]
+[gd_scene load_steps=17 format=4 uid="uid://cocnab8v1yeuh"]
 
 [ext_resource type="Texture2D" uid="uid://u3fn5w8a5huo" path="res://graphics/background/background_tiled.png" id="1_6lkj3"]
 [ext_resource type="TileSet" uid="uid://uaki5lgoi8bh" path="res://resources/tilesets/checkerboard_tileset.tres" id="1_g3inq"]
 [ext_resource type="PackedScene" uid="uid://d0voq0u04dtsa" path="res://scenes/game objects/player/player.tscn" id="1_ssmg3"]
+[ext_resource type="Script" path="res://scenes/game arena/game_arena.gd" id="1_t8ipd"]
 [ext_resource type="TileSet" uid="uid://bnnwf8oqua0bc" path="res://resources/tilesets/background_tileset.tres" id="2_h5dj8"]
 [ext_resource type="PackedScene" uid="uid://qxx1wuijwbnt" path="res://scenes/director/director.tscn" id="2_u1v6p"]
 [ext_resource type="Script" path="res://scenes/game arena/camera.gd" id="3_c3vsv"]
@@ -12,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://delbgcjxf1h1l" path="res://scenes/ui/hud/hud_manager.tscn" id="6_gxraa"]
 [ext_resource type="Script" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="7_17bto"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="8_yv4uh"]
+[ext_resource type="PackedScene" uid="uid://doav3tyuwu6jk" path="res://scenes/ui/controls/controls_canvas_layer.tscn" id="13_2mire"]
 
 [sub_resource type="Resource" id="Resource_kpvka"]
 script = ExtResource("6_01tdi")
@@ -36,6 +38,8 @@ bake_internal = 64
 __follow_timeline = false
 
 [node name="GameArena" type="Node2D"]
+script = ExtResource("1_t8ipd")
+mobile_controls_canvas_layer = ExtResource("13_2mire")
 
 [node name="BackgroundCanvasLayer" type="CanvasLayer" parent="."]
 layer = -1

@@ -92,7 +92,7 @@ func set_enemies_to_points() -> void:
 
 func set_enemy_spawn_chances() -> void:
 	enemy_spawn_chances = {
-		1: ChanceList.new([["Waver", 4]]),
+		1: ChanceList.new([["Octanade", 4]]),
 		2: ChanceList.new([["Shooter", 4], ["Burster", 1]]),
 		3: ChanceList.new([["Shooter", 4], ["Burster", 4]]),
 		4: ChanceList.new([["Shooter", 2], ["Burster", 1]]),

@@ -14,7 +14,7 @@ class_name Player
 @export var max_health: int = 3
 
 var time_alive: float = 0.0
-var score: float = 0.0
+var score: int = 0
 
 var move_direction: Vector2 = Vector2.ZERO
 var is_dashing: bool = false
@@ -94,6 +94,16 @@ func update_score(new_score: int) -> void:
 	score = new_score
 	
 	GameEvents.fire_player_score_updated()
+	
+	if score % 50 == 0 and health < 6:
+		update_health(health + 1)
+		perform_effects("health")
+
+
+func take_damage() -> void:
+	update_health(health - 1)
+	
+	perform_effects("hurt")
 
 
 func restart_doom_timer() -> void:
@@ -122,6 +132,11 @@ func perform_effects(effect_type: String) -> void:
 		tween.tween_property(sprite, "scale", Vector2(1.3, 1.3), 0.05)
 		tween.tween_property(sprite, "scale", Vector2.ONE, 0.05).from_current()
 		SoundManager.play_sound_with_pitch(ResourceHolder.sound_point, randf_range(1.8, 2.2), "Sound")
+	elif effect_type == "health":
+		var tween := self.create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		tween.tween_property(sprite, "scale", Vector2(1.3, 1.3), 0.05)
+		tween.tween_property(sprite, "scale", Vector2.ONE, 0.05).from_current()
+		SoundManager.play_sound_with_pitch(ResourceHolder.sound_health, randf_range(0.8, 1.2), "Sound")
 
 
 func _on_dash_duration_timer_timeout() -> void:
@@ -143,15 +158,11 @@ func _on_doom_timer_timeout() -> void:
 
 
 func _on_hurt_box_area_2d_area_entered(other_area: Area2D) -> void:
-	update_health(health - 1)
-	
-	perform_effects("hurt")
+	take_damage()
 
 
 func _on_hurt_box_area_2d_body_entered(other_body: Node2D) -> void:
-	update_health(health - 1)
-	
-	perform_effects("hurt")
+	take_damage()
 
 
 func _on_collectible_area_2d_area_entered(other_area: Area2D) -> void:

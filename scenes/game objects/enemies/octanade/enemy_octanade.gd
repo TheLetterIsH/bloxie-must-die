@@ -23,16 +23,17 @@ func shoot_at_player() -> void:
 	if player == null:
 		return
 	
-	for i in range(3):
-		var projectile_instance := projectile_scene.instantiate()
-		projectile_instance.global_position = self.global_position
-		ObjectManager.get_projectile_container().add_child(projectile_instance)
-		projectile_instance.move_direction = (player.global_position - self.global_position).normalized()
-		projectile_instance.modulate = color
+	for i in range(2):
+		for j in range(8):
+			var projectile_instance := projectile_scene.instantiate()
+			projectile_instance.global_position = self.global_position
+			ObjectManager.get_projectile_container().add_child(projectile_instance)
+			projectile_instance.move_direction = Vector2.RIGHT.rotated(rotation).rotated(j * deg_to_rad(45))
+			projectile_instance.modulate = color
 		perform_effects("shoot")
-		await get_tree().create_timer(0.1).timeout
-	
-	await get_tree().create_timer(0.05).timeout
+		
+		if i == 0: 
+			await get_tree().create_timer(0.5).timeout
 	
 	destroy()
 
@@ -51,8 +52,7 @@ func perform_effects(effect_type: String) -> void:
 	elif effect_type == "shoot":
 		var tween := self.create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		tween.tween_property(sprite, "scale", Vector2(1.5, 1.5), 0.05)
-		tween.tween_property(sprite, "scale", Vector2(0.5, 0.5), 0.05)
-		
+		tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.05)
 		SoundManager.play_sound_with_pitch(ResourceHolder.sound_shoot_2, randf_range(0.8, 1.2), "Sound")
 	elif effect_type == "death":
 		var death_particles_instance := death_particles_scene.instantiate()

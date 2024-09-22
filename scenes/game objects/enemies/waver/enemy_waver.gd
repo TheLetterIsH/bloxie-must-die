@@ -23,15 +23,16 @@ func shoot_at_player() -> void:
 	if player == null:
 		return
 	
-	var projectile_instance := projectile_scene.instantiate()
-	projectile_instance.global_position = self.global_position
-	ObjectManager.get_projectile_container().add_child(projectile_instance)
-	projectile_instance.move_direction = (player.global_position - self.global_position).normalized()
-	projectile_instance.modulate = color
+	for i in range(2):
+		var projectile_instance := projectile_scene.instantiate()
+		projectile_instance.global_position = self.global_position
+		ObjectManager.get_projectile_container().add_child(projectile_instance)
+		projectile_instance.move_direction = (player.global_position - self.global_position).normalized()
+		projectile_instance.modulate = color
+		perform_effects("shoot")
+		await get_tree().create_timer(0.1).timeout
 	
-	perform_effects("shoot")
-	
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().create_timer(0.05).timeout
 	
 	destroy()
 
@@ -53,7 +54,7 @@ func perform_effects(effect_type: String) -> void:
 		tween.parallel().tween_property(self, "rotation_degrees", 45, 0.05)
 		tween.tween_property(sprite, "scale", Vector2(0.5, 0.5), 0.05)
 		
-		SoundManager.play_sound_with_pitch(ResourceHolder.sound_shoot_1, randf_range(0.8, 1.2), "Sound")
+		SoundManager.play_sound_with_pitch(ResourceHolder.sound_shoot_2, randf_range(0.8, 1.2), "Sound")
 	elif effect_type == "death":
 		var death_particles_instance := death_particles_scene.instantiate()
 		death_particles_instance.global_position = self.global_position

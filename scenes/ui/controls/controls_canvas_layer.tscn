@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://doav3tyuwu6jk"]
+
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_065db"]
+[ext_resource type="Texture2D" uid="uid://bve6ew5mao5jf" path="res://graphics/controls/joystick_outer.png" id="2_c2hr5"]
+[ext_resource type="Texture2D" uid="uid://dmnd6so7clq15" path="res://graphics/controls/joystick_inner.png" id="3_m8haq"]
+[ext_resource type="Script" path="res://scenes/ui/controls/dash_touch_screen_button.gd" id="4_qcwso"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eih34"]
+size = Vector2(640, 360)
+
+[node name="ControlsCanvasLayer" type="CanvasLayer"]
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("1_065db")]
+offset_top = -360.0
+offset_right = 256.0
+offset_bottom = 0.0
+pressed_color = Color(1, 1, 1, 1)
+deadzone_size = 8.0
+clampzone_size = 32.0
+joystick_mode = 1
+visibility_mode = 2
+action_left = "move_left"
+action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
+
+[node name="Base" parent="Virtual Joystick" index="0"]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("2_c2hr5")
+
+[node name="Tip" parent="Virtual Joystick/Base" index="0"]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("3_m8haq")
+
+[node name="TouchScreenButtonContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 320.0
+offset_right = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DashTouchScreenButton" type="TouchScreenButton" parent="TouchScreenButtonContainer"]
+shape = SubResource("RectangleShape2D_eih34")
+shape_centered = false
+action = "dash"
+visibility_mode = 1
+script = ExtResource("4_qcwso")
+
+[editable path="Virtual Joystick"]

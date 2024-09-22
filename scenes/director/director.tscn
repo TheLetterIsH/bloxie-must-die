@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://qxx1wuijwbnt"]
+[gd_scene load_steps=11 format=3 uid="uid://qxx1wuijwbnt"]
 
 [ext_resource type="Script" path="res://scenes/director/director.gd" id="1_kctjt"]
 [ext_resource type="PackedScene" uid="uid://buh3ub8ycscu8" path="res://scenes/game objects/enemies/shooter/enemy_shooter.tscn" id="2_cupc2"]
@@ -6,17 +6,29 @@
 [ext_resource type="PackedScene" uid="uid://6rw2dffqa0wj" path="res://scenes/game objects/enemies/_spawner indicator/spawn_indicator.tscn" id="2_jrd4e"]
 [ext_resource type="PackedScene" uid="uid://c11fn4cl2onuq" path="res://scenes/game objects/enemies/burster/enemy_burster.tscn" id="4_buh2e"]
 [ext_resource type="PackedScene" uid="uid://bftkr3lfea0ml" path="res://scenes/game objects/enemies/waver/enemy_waver.tscn" id="5_1627b"]
+[ext_resource type="PackedScene" uid="uid://bmjrq4u18jefg" path="res://scenes/game objects/enemies/quadnade/enemy_quadnade.tscn" id="6_tg5e6"]
+[ext_resource type="PackedScene" uid="uid://cssagu51k0yj1" path="res://scenes/game objects/enemies/blaster/enemy_blaster.tscn" id="7_f1muc"]
+[ext_resource type="PackedScene" uid="uid://dq4gmcqc2y6bs" path="res://scenes/game objects/enemies/laser/enemy_laser.tscn" id="8_8g7o8"]
+[ext_resource type="PackedScene" uid="uid://bonpdx0kdt4s4" path="res://scenes/game objects/enemies/octanade/enemy_octanade.tscn" id="9_sk6uy"]
 
 [node name="Director" type="Node2D" groups=["director"]]
 script = ExtResource("1_kctjt")
 point_scene = ExtResource("2_d3fhx")
 enemy_scenes = {
+"Blaster": ExtResource("7_f1muc"),
 "Burster": ExtResource("4_buh2e"),
+"Laser": ExtResource("8_8g7o8"),
+"Octanade": ExtResource("9_sk6uy"),
+"Quadnade": ExtResource("6_tg5e6"),
 "Shooter": ExtResource("2_cupc2"),
 "Waver": ExtResource("5_1627b")
 }
 enemy_colors = {
+"Blaster": Color(0.54902, 0.411765, 0.811765, 1),
 "Burster": Color(0.305882, 0.631373, 0.866667, 1),
+"Laser": Color(0.282353, 0.756863, 0.411765, 1),
+"Octanade": Color(0.878431, 0.25098, 0.364706, 1),
+"Quadnade": Color(0.937255, 0.490196, 0.341176, 1),
 "Shooter": Color(1, 0.796078, 0.431373, 1),
 "Waver": Color(0.823529, 0.388235, 0.678431, 1)
 }

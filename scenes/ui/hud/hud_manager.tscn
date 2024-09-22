@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://delbgcjxf1h1l"]
+[gd_scene load_steps=10 format=3 uid="uid://delbgcjxf1h1l"]
 
 [ext_resource type="Script" path="res://scenes/ui/hud/hud_manager.gd" id="1_d7u65"]
 [ext_resource type="FontFile" uid="uid://bmdcfdv22q7f6" path="res://resources/fonts/m5x7.ttf" id="1_fws58"]
 [ext_resource type="Texture2D" uid="uid://b2h5afwh6smgi" path="res://graphics/hud/health_bar_over.png" id="2_ijk5d"]
 [ext_resource type="Texture2D" uid="uid://bpbbv2e4ty0nm" path="res://graphics/hud/health_bar_progress.png" id="3_gxohj"]
+[ext_resource type="PackedScene" uid="uid://2gaywqqfoej2" path="res://scenes/ui/hud/heart_texture_rect.tscn" id="3_j3cb2"]
 [ext_resource type="Texture2D" uid="uid://c2yp3cxt5luu5" path="res://graphics/hud/dash_bar_over.png" id="4_l2op8"]
 [ext_resource type="Texture2D" uid="uid://5o735georv37" path="res://graphics/hud/dash_bar_progress.png" id="5_qhhjd"]
 [ext_resource type="Texture2D" uid="uid://ywu2bipdr8lr" path="res://graphics/hud/doom_bar_over.png" id="7_icghg"]
@@ -17,25 +18,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d7u65")
+heart_texture_rect_scene = ExtResource("3_j3cb2")
 
 [node name="LeftMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -85.0
-offset_right = 120.0
-offset_bottom = 85.0
-grow_vertical = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_right = -200.0
+offset_bottom = 170.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LeftMarginContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-alignment = 1
 
 [node name="TimeAliveVBoxContainer" type="VBoxContainer" parent="LeftMarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = -4
+theme_override_constants/separation = 4
 
 [node name="TimeAliveHeadingLabel" type="RichTextLabel" parent="LeftMarginContainer/VBoxContainer/TimeAliveVBoxContainer"]
 modulate = Color(0.639216, 0.639216, 0.639216, 1)
@@ -51,14 +53,32 @@ autowrap_mode = 0
 [node name="TimeAliveLabel" type="RichTextLabel" parent="LeftMarginContainer/VBoxContainer/TimeAliveVBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(0.305882, 0.631373, 0.866667, 1)
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_font_sizes/normal_font_size = 0
 bbcode_enabled = true
 text = "12:32"
 fit_content = true
 autowrap_mode = 0
 
+[node name="HeartMarginContainer" type="MarginContainer" parent="LeftMarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 8
+
+[node name="HealthFlowContainer" type="FlowContainer" parent="LeftMarginContainer/VBoxContainer/HeartMarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/h_separation = 8
+vertical = true
+reverse_fill = true
+
 [node name="HealthBarMarginContainer" type="MarginContainer" parent="LeftMarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
@@ -83,6 +103,7 @@ texture_progress = ExtResource("3_gxohj")
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 8
 
 [node name="DashBar" type="TextureProgressBar" parent="LeftMarginContainer/VBoxContainer/DashBarMarginContainer"]
 unique_name_in_owner = true
@@ -116,25 +137,22 @@ autowrap_mode = 0
 [node name="RightMarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 170)
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -32.0
-offset_bottom = 32.0
-grow_horizontal = 0
-grow_vertical = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 200.0
+offset_right = 320.0
+offset_bottom = 170.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="RightMarginContainer"]
 custom_minimum_size = Vector2(112, 0)
 layout_mode = 2
-alignment = 1
 
 [node name="ScoreVBoxContainer" type="VBoxContainer" parent="RightMarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = -4
+theme_override_constants/separation = 4
 
 [node name="ScoreHeadingLabel" type="RichTextLabel" parent="RightMarginContainer/VBoxContainer/ScoreVBoxContainer"]
 modulate = Color(0.639216, 0.639216, 0.639216, 1)
@@ -150,6 +168,7 @@ autowrap_mode = 0
 [node name="ScoreLabel" type="RichTextLabel" parent="RightMarginContainer/VBoxContainer/ScoreVBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(0.921569, 0.921569, 0.921569, 1)
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 0
 bbcode_enabled = true
@@ -164,7 +183,7 @@ theme_override_constants/margin_right = 0
 
 [node name="DoomBar" type="TextureProgressBar" parent="RightMarginContainer/VBoxContainer/DoomBarMarginContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 84)
+custom_minimum_size = Vector2(16, 96)
 layout_mode = 2
 size_flags_horizontal = 0
 max_value = 12.0
