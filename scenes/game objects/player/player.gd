@@ -13,6 +13,9 @@ class_name Player
 @export_group("Health")
 @export var max_health: int = 3
 
+@export_group("Effects")
+@export var death_particles_scene: PackedScene
+
 var time_alive: float = 0.0
 var score: int = 0
 
@@ -111,6 +114,10 @@ func restart_doom_timer() -> void:
 
 
 func destroy() -> void:
+	perform_effects("death")
+	
+	GameEvents.fire_player_death()
+	
 	self.queue_free()
 
 
@@ -137,6 +144,12 @@ func perform_effects(effect_type: String) -> void:
 		tween.tween_property(sprite, "scale", Vector2(1.3, 1.3), 0.05)
 		tween.tween_property(sprite, "scale", Vector2.ONE, 0.05).from_current()
 		SoundManager.play_sound_with_pitch(ResourceHolder.sound_health, randf_range(0.8, 1.2), "Sound")
+	elif effect_type == "death":
+		var death_particles_instance := death_particles_scene.instantiate()
+		death_particles_instance.global_position = self.global_position
+		ObjectManager.get_effects_container().add_child(death_particles_instance)
+		death_particles_instance.modulate = Color("#ebebeb")
+		SoundManager.play_sound_with_pitch(ResourceHolder.sound_death, randf_range(0.8, 1.2), "Sound")
 
 
 func _on_dash_duration_timer_timeout() -> void:

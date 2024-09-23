@@ -11,18 +11,22 @@ config_version=5
 [application]
 
 config/name="Bloxie Must Die"
-run/main_scene="res://scenes/game arena/game_arena.tscn"
+run/main_scene="res://scenes/ui/main menu/main_menu_screen.tscn"
+config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [autoload]
 
+SceneManager="*res://addons/scene_manager/SceneManager.tscn"
+SaveSystem="*res://scenes/autoloads/save_system.tscn"
+SoundManager="*res://addons/sound_manager/sound_manager.gd"
 GameEvents="*res://scenes/autoloads/game_events.tscn"
+GameManager="*res://scenes/autoloads/game_manager.tscn"
 ObjectManager="*res://scenes/autoloads/object_manager.tscn"
 ResourceHolder="*res://scenes/autoloads/resource_holder.tscn"
 Utils="*res://scenes/utils/utils.tscn"
 Shaker="*res://addons/shaker/src/Shaker.gd"
-SoundManager="*res://addons/sound_manager/sound_manager.gd"
 
 [display]
 
@@ -106,7 +110,6 @@ dash={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
-pointing/emulate_mouse_from_touch=false
 
 [layer_names]
 

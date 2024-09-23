@@ -23,11 +23,16 @@ func shoot_at_player() -> void:
 	if player == null:
 		return
 	
+	var target_position := (player.global_position - self.global_position).normalized()
+	
 	for i in range(3):
 		var projectile_instance := projectile_scene.instantiate()
 		projectile_instance.global_position = self.global_position
 		ObjectManager.get_projectile_container().add_child(projectile_instance)
-		projectile_instance.move_direction = (player.global_position - self.global_position).normalized()
+		if player == null:
+			projectile_instance.move_direction = target_position
+		else:
+			projectile_instance.move_direction = (player.global_position - self.global_position).normalized()
 		projectile_instance.modulate = color
 		perform_effects("shoot")
 		await get_tree().create_timer(0.1).timeout

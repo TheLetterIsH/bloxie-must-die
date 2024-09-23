@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://qxx1wuijwbnt"]
+[gd_scene load_steps=12 format=3 uid="uid://qxx1wuijwbnt"]
 
 [ext_resource type="Script" path="res://scenes/director/director.gd" id="1_kctjt"]
 [ext_resource type="PackedScene" uid="uid://buh3ub8ycscu8" path="res://scenes/game objects/enemies/shooter/enemy_shooter.tscn" id="2_cupc2"]
@@ -10,12 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://cssagu51k0yj1" path="res://scenes/game objects/enemies/blaster/enemy_blaster.tscn" id="7_f1muc"]
 [ext_resource type="PackedScene" uid="uid://dq4gmcqc2y6bs" path="res://scenes/game objects/enemies/laser/enemy_laser.tscn" id="8_8g7o8"]
 [ext_resource type="PackedScene" uid="uid://bonpdx0kdt4s4" path="res://scenes/game objects/enemies/octanade/enemy_octanade.tscn" id="9_sk6uy"]
+[ext_resource type="PackedScene" uid="uid://baj4bdpis685j" path="res://scenes/game objects/enemies/bouncer/enemy_bouncer.tscn" id="10_widqt"]
 
 [node name="Director" type="Node2D" groups=["director"]]
 script = ExtResource("1_kctjt")
 point_scene = ExtResource("2_d3fhx")
 enemy_scenes = {
 "Blaster": ExtResource("7_f1muc"),
+"Bouncer": ExtResource("10_widqt"),
 "Burster": ExtResource("4_buh2e"),
 "Laser": ExtResource("8_8g7o8"),
 "Octanade": ExtResource("9_sk6uy"),

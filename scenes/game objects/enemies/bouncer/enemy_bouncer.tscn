@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://baj4bdpis685j"]
+
+[ext_resource type="Texture2D" uid="uid://cy3rhy3l41xlr" path="res://scenes/game objects/enemies/bouncer/bouncer_outer.png" id="1_6txck"]
+[ext_resource type="Script" path="res://scenes/game objects/enemies/bouncer/enemy_bouncer.gd" id="1_g0kkj"]
+[ext_resource type="PackedScene" uid="uid://qmgxlmud06rb" path="res://scenes/particles/death/particles_death.tscn" id="2_kaxdv"]
+[ext_resource type="Texture2D" uid="uid://b1ymddo5lxb0b" path="res://scenes/game objects/enemies/bouncer/bouncer_inner.png" id="2_vtrlg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lcb2j"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0484"]
+size = Vector2(10, 10)
+
+[node name="EnemyBouncer" type="CharacterBody2D"]
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_g0kkj")
+death_particles_scene = ExtResource("2_kaxdv")
+
+[node name="OuterSprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_6txck")
+
+[node name="InnerSprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_vtrlg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lcb2j")
+
+[node name="HitBoxArea2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea2D"]
+shape = SubResource("RectangleShape2D_n0484")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[connection signal="area_entered" from="HitBoxArea2D" to="." method="_on_hit_box_area_2d_area_entered"]

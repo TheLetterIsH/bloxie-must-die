@@ -1,0 +1,124 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbw1l2pl3vaip"]
+
+[ext_resource type="Shader" path="res://resources/shaders/scrolling_background.gdshader" id="1_15ujx"]
+[ext_resource type="Script" path="res://scenes/ui/main menu/main_menu_screen.gd" id="1_atpqe"]
+[ext_resource type="Texture2D" uid="uid://u3fn5w8a5huo" path="res://graphics/background/background_tiled.png" id="2_2577h"]
+[ext_resource type="FontFile" uid="uid://bmdcfdv22q7f6" path="res://resources/fonts/m5x7.ttf" id="4_f0sbj"]
+[ext_resource type="PackedScene" uid="uid://cg05kaik72vc1" path="res://scenes/ui/better button/better_button.tscn" id="5_dr7bq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_paq2h"]
+shader = ExtResource("1_15ujx")
+shader_parameter/speed = 0.5
+
+[node name="MainMenuScreen" type="CanvasLayer"]
+script = ExtResource("1_atpqe")
+
+[node name="BackgroundTextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_paq2h")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2577h")
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TitleVBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TitleLabel1" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TitleVBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0][center]bloxie[/center][/wave]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TitleLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TitleVBoxContainer"]
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0][center]must die[/center][/wave]"
+fit_content = true
+
+[node name="HighScoreVBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="BestHeadingLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HighScoreVBoxContainer"]
+modulate = Color(0.639216, 0.639216, 0.639216, 1)
+clip_contents = false
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_f0sbj")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=5.0][center]best[/center][/wave]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HighScoreVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="HighestTimeLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HighScoreVBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.305882, 0.631373, 0.866667, 1)
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "12:34"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HighScoreLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HighScoreVBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 0.796078, 0.431373, 1)
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "371"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ButtonVBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="PlayButton" parent="MarginContainer/VBoxContainer/ButtonVBoxContainer" instance=ExtResource("5_dr7bq")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 0
+text = "play"
+color = Color(0.282353, 0.756863, 0.411765, 1)
+
+[node name="QuitButton" parent="MarginContainer/VBoxContainer/ButtonVBoxContainer" instance=ExtResource("5_dr7bq")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 0
+text = "quit"
+color = Color(0.878431, 0.25098, 0.364706, 1)
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonVBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonVBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -46,7 +46,7 @@ size_flags_horizontal = 8
 theme_override_fonts/normal_font = ExtResource("1_fws58")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "alive"
+text = "time"
 fit_content = true
 autowrap_mode = 0
 

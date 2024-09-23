@@ -51,21 +51,28 @@ func spawn_point() -> void:
 
 
 func spawn_enemy(enemy_type: String) -> void:
-	print(str(index) + ": " + str(wave_time) + ", " + enemy_type)
-	
 	var spawn_position := get_random_spawn_position()
+	
+	var color := enemy_colors.values().pick_random() as Color
 	
 	var enemy_spawn_indicator_instance := enemy_spawn_indicator_scene.instantiate() as Node2D
 	enemy_spawn_indicator_instance.global_position = spawn_position
-	enemy_spawn_indicator_instance.modulate = enemy_colors[enemy_type]
+	if enemy_type == "Bouncer":
+		enemy_spawn_indicator_instance.modulate = color
+	else:
+		color = enemy_colors[enemy_type]
+		enemy_spawn_indicator_instance.modulate = color
 	ObjectManager.get_effects_container().add_child(enemy_spawn_indicator_instance)
 	
 	await get_tree().create_timer(time_before_spawning_enemy).timeout
 	
-	var enemy_instance := (enemy_scenes[enemy_type] as PackedScene).instantiate() as Area2D
+	var enemy_instance := (enemy_scenes[enemy_type] as PackedScene).instantiate() as Node2D
 	enemy_instance.global_position = spawn_position
 	ObjectManager.get_enemy_container().add_child(enemy_instance)
-	enemy_instance.color = enemy_colors[enemy_type]
+	enemy_instance.color = color
+	
+	if enemy_type == "Bouncer":
+		enemy_instance.sprite.modulate = color
 
 
 func set_wave_to_points() -> void:
@@ -92,7 +99,7 @@ func set_enemies_to_points() -> void:
 
 func set_enemy_spawn_chances() -> void:
 	enemy_spawn_chances = {
-		1: ChanceList.new([["Octanade", 4]]),
+		1: ChanceList.new([["Shooter", 4]]),
 		2: ChanceList.new([["Shooter", 4], ["Burster", 1]]),
 		3: ChanceList.new([["Shooter", 4], ["Burster", 4]]),
 		4: ChanceList.new([["Shooter", 2], ["Burster", 1]]),

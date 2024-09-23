@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0voq0u04dtsa"]
+[gd_scene load_steps=10 format=3 uid="uid://d0voq0u04dtsa"]
 
 [ext_resource type="Script" path="res://scenes/game objects/player/player.gd" id="1_2n8ui"]
 [ext_resource type="Texture2D" uid="uid://daao2e7w6p4dh" path="res://scenes/game objects/player/player.png" id="1_kyla2"]
+[ext_resource type="PackedScene" uid="uid://qmgxlmud06rb" path="res://scenes/particles/death/particles_death.tscn" id="2_2600w"]
 [ext_resource type="Shader" path="res://resources/shaders/hit_flash_and_squash.gdshader" id="2_kbj02"]
 [ext_resource type="PackedScene" uid="uid://c0lmduusb11js" path="res://scenes/particles/dash trail/particles_dash_trail.tscn" id="2_qhwo4"]
 
@@ -25,6 +26,7 @@ size = Vector2(16, 16)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_2n8ui")
+death_particles_scene = ExtResource("2_2600w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_4x63w")
